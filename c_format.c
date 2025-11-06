@@ -1,38 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   c_format.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaazouz <amaazouz@student.42belgium.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 17:17:31 by amaazouz          #+#    #+#             */
-/*   Updated: 2025/11/05 21:10:50 by amaazouz         ###   ########.fr       */
+/*   Created: 2025/11/06 14:39:23 by amaazouz          #+#    #+#             */
+/*   Updated: 2025/11/06 15:27:37 by amaazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdarg.h>
+#include <unistd.h>
 
-int	format(int n, ...)
+char	c_format(char c, int count)
 {
-	int	i;
-	va_list	args;
-
-	i = 0;
-	va_start(args, n);
-	while (i < n)
-	{
-		printf("%s", va_arg(args, char *));
-		i++;
-	}
-	printf("\n");
-	va_end(args);
-}
-
-int	main(void)
-{
-	format(4, " dodo", " bobo"," fofo", " 66");
-	format(3," 22"," dd1"," ddle");
-	format(1, " dlele");
-	return (0);
+	write(1, &c, 1);
+	count = 1;
 }

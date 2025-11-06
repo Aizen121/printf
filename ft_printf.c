@@ -1,64 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   format.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaazouz <amaazouz@student.42belgium.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 21:11:56 by amaazouz          #+#    #+#             */
-/*   Updated: 2025/11/05 23:27:07 by amaazouz         ###   ########.fr       */
+/*   Created: 2025/11/04 17:17:31 by amaazouz          #+#    #+#             */
+/*   Updated: 2025/11/06 14:37:16 by amaazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <unistd.h>
+#include <stdarg.h>
 
-char	*print(const char *str, ...)
+int	ft_convertion(char *format, args, count)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-	{
-		while(str[i] != '%' && str[i])
-		{
-			write(1, &str[i], 1);
-			i++;
-		}
-		if (str[i] == '%' && str[i + 1] != '%')
-			i++;
-		else if (str[i] == '%' && str[i + 1] == '%')
-		{
-			i++;
-			while (str[i] == '%' && str[i])
-			{
-				write(1, &str[i], 1);
-				i++;
-			}
-		}
-	}
+	if (*format == 'c')
 }
 
-int	arg_count(const char *str, ...)
+int	ft_printf(char *format, ...)
 {
-	size_t	i;
-	size_t	count;
+	int	i;
+	int	count;
+	va_list	args;
 
 	i = 0;
 	count = 0;
-	while (str[i])
+	va_start(args, format);
+	while (*format)
 	{
-		while (str[i] == '%' && str[i + 1] == '%')
-			i++;
-		if (str[i] == '%' && str[i - 1] != '%')
+		if (*format == '%')
+		{
+			format++;
+			ft_convertion(va_arg(args, char *, count));
+		}
+		else
+		{
+			write(1, &format, 1);
 			count++;
-		i++;
+		}
+		format++;
 	}
+	va_end(args);
 	return (count);
-}	
+}
 
 int	main(void)
 {
-	print("je test %%% la %s de %d ne finira %s jamais");
+	format(4, " dodo", " bobo"," fofo", " 66");
+	format(3," 22"," dd1"," ddle");
+	format(1, " dlele");
 	return (0);
 }
