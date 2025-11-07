@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_format.c                                         :+:      :+:    :+:   */
+/*   s_format.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaazouz <amaazouz@student.42belgium.      +#+  +:+       +#+        */
+/*   By: amaazouz <amaazouz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 14:39:23 by amaazouz          #+#    #+#             */
-/*   Updated: 2025/11/06 18:46:16 by amaazouz         ###   ########.fr       */
+/*   Created: 2025/11/06 19:40:58 by amaazouz          #+#    #+#             */
+/*   Updated: 2025/11/06 20:37:34 by amaazouz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	c_format(char c)
+int	s_format(const char *str)
 {
-	write(1, &c, 1);
-	return (1);
+	int	count;
+	int	i;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		write (1, str, 1);
+		i++;
+		count++;
+	}
+	return (count);
 }
